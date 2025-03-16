@@ -1,11 +1,12 @@
+import { Header } from './layouts/Header'
+import { Main } from './layouts/Main'
 import './App.css'
 
 export const App = () => {
   return (
     <div className="app">
-      <header className="header">
-        <h1 className="app-header">Book Library App</h1>
-      </header>
+      <Header />
+      <Main />
     </div>
   )
 }
