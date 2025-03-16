@@ -1,5 +1,11 @@
 import './App.css'
 
 export const App = () => {
-  return <></>
+  return (
+    <div className="app">
+      <header className="header">
+        <h1 className="app-header">Book Library App</h1>
+      </header>
+    </div>
+  )
 }
