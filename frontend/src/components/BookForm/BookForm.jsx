@@ -49,6 +49,7 @@ export const BookForm = () => {
             id="title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+            required
           />
         </div>
 
@@ -60,6 +61,7 @@ export const BookForm = () => {
             id="author"
             value={author}
             onChange={(e) => setAuthor(e.target.value)}
+            required
           />
         </div>
 
