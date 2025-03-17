@@ -23,7 +23,7 @@ export const BookList = () => {
           {books.map(({ title, author, id }, i) => (
             <li key={id}>
               <div className="book-info">
-                {++i}. {title} <em>by</em> <strong>{author}</strong>
+                {++i}. "{title}" <em>by</em> <strong>{author}</strong>
               </div>
 
               <div className="book-actions">
