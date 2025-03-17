@@ -16,4 +16,13 @@ const deleteBook = (bookId) => {
   }
 }
 
-export { addBook, deleteBook }
+const toggleFavoriteBook = (bookId) => {
+  return {
+    type: actionTypes.TOGGLE_FAVORITE_BOOK,
+    payload: {
+      id: bookId,
+    },
+  }
+}
+
+export { addBook, deleteBook, toggleFavoriteBook }

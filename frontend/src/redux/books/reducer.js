@@ -12,6 +12,14 @@ export const booksReducer = (state = initialState, { type, payload }) => {
       return state.filter(({ id }) => id !== payload.id)
     }
 
+    case actionTypes.TOGGLE_FAVORITE_BOOK: {
+      return state.map((book) =>
+        book.id === payload.id
+          ? { ...book, isFavorite: !book.isFavorite }
+          : { ...book },
+      )
+    }
+
     default:
       return state
   }
