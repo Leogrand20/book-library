@@ -7,13 +7,17 @@ import {
   toggleFavoriteBook,
 } from '../../redux/books/actionCreators'
 
-import { selectTitleFilter } from '../../redux/slices/filterSlice'
+import {
+  selectFilterTitle,
+  selectFilterAuthor,
+} from '../../redux/slices/filterSlice'
 
 import './BookList.css'
 
 export const BookList = () => {
   const books = useSelector((state) => state.books)
-  const titleFilter = useSelector(selectTitleFilter)
+  const filterTitle = useSelector(selectFilterTitle)
+  const filterAuthor = useSelector(selectFilterAuthor)
   const dispatch = useDispatch()
 
   const handleDeleteBook = (bookId) => {
@@ -24,9 +28,17 @@ export const BookList = () => {
     dispatch(toggleFavoriteBook(bookId))
   }
 
-  const filteredBooks = books.filter((book) =>
-    book.title.toLowerCase().includes(titleFilter.toLowerCase()),
-  )
+  const filteredBooks = books.filter((book) => {
+    const titleMatches = book.title
+      .toLowerCase()
+      .includes(filterTitle.toLowerCase())
+
+    const authorMatches = book.author
+      .toLowerCase()
+      .includes(filterAuthor.toLowerCase())
+
+    return titleMatches && authorMatches
+  })
 
   return (
     <div className="app-block book-list">
