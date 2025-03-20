@@ -3,9 +3,10 @@ import { useDispatch } from 'react-redux'
 import { BsBookmarkStar, BsBookmarkStarFill } from 'react-icons/bs'
 
 import {
-  deleteBook,
-  toggleFavoriteBook,
-} from '../../redux/books/actionCreators'
+  selectBooks,
+  setDeleteBook,
+  setToggleFavoriteBook,
+} from '../../redux/slices/booksSlice'
 
 import {
   selectFilterTitle,
@@ -16,18 +17,18 @@ import {
 import './BookList.css'
 
 export const BookList = () => {
-  const books = useSelector((state) => state.books)
+  const books = useSelector(selectBooks)
   const filterTitle = useSelector(selectFilterTitle)
   const filterAuthor = useSelector(selectFilterAuthor)
   const filterFavorite = useSelector(selectFilterFavorite)
   const dispatch = useDispatch()
 
   const handleDeleteBook = (bookId) => {
-    dispatch(deleteBook(bookId))
+    dispatch(setDeleteBook(bookId))
   }
 
   const handleToggleFavoriteBook = (bookId) => {
-    dispatch(toggleFavoriteBook(bookId))
+    dispatch(setToggleFavoriteBook(bookId))
   }
 
   const filteredBooks = books.filter((book) => {
