@@ -71,11 +71,12 @@ export const BookList = () => {
         <p>No available books</p>
       ) : (
         <ul className="book-list">
-          {filteredBooks.map(({ title, author, id, isFavorite }, i) => (
+          {filteredBooks.map(({ title, author, id, isFavorite, source }, i) => (
             <li key={id}>
               <div className="book-info">
                 {++i}. "{highlightMatch(title, filterTitle)}" <em>by</em>{' '}
-                <strong>{highlightMatch(author, filterAuthor)}</strong>
+                <strong>{highlightMatch(author, filterAuthor)}</strong> (
+                {source})
               </div>
 
               <div className="book-actions">
