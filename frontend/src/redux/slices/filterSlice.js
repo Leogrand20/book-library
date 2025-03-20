@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   title: '',
   author: '',
+  onlyFavorite: false,
 }
 
 const filterSlice = createSlice({
@@ -17,15 +18,24 @@ const filterSlice = createSlice({
       state.author = payload
     },
 
+    setOnlyFavorite: (state) => {
+      state.onlyFavorite = !state.onlyFavorite
+    },
+
     resetFilters: () => initialState,
   },
 })
 
 // export const setFilterTitle = filterSlice.actions.setFilterTitle
-export const { setFilterTitle, setFilterAuthor, resetFilters } =
-  filterSlice.actions
+export const {
+  setFilterTitle,
+  setFilterAuthor,
+  setOnlyFavorite,
+  resetFilters,
+} = filterSlice.actions
 
 export const selectFilterTitle = (state) => state.filter.title
 export const selectFilterAuthor = (state) => state.filter.author
+export const selectFilterFavorite = (state) => state.filter.onlyFavorite
 
 export default filterSlice.reducer
