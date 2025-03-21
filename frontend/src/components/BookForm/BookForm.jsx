@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { createBook } from '../../utils/createBook'
-import { setAddBook, thunkFunction } from '../../redux/slices/booksSlice'
+import { setAddBook, fetchBook } from '../../redux/slices/booksSlice'
 import data from '../../data/books.json'
 
 import './BookForm.css'
@@ -41,7 +41,7 @@ export const BookForm = () => {
   }
 
   const handleAddRandomBookViaApi = () => {
-    dispatch(thunkFunction)
+    dispatch(fetchBook())
   }
 
   return (
@@ -74,15 +74,15 @@ export const BookForm = () => {
         </div>
 
         <div>
-          <button type="submit">Add Book</button>
+          <button type="submit">Add current book</button>
           <button type="button" onClick={handleAddRandomBook}>
-            Add Random
+            Add random book
           </button>
         </div>
 
         <div>
           <button type="button" onClick={handleAddRandomBookViaApi}>
-            Add Random Book via API
+            Add random book via API
           </button>
         </div>
       </form>
