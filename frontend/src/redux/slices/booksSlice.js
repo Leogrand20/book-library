@@ -8,7 +8,7 @@ const initialState = {
 }
 
 export const fetchBook = createAsyncThunk('books/fetchBook', async () => {
-  const { data } = await axios('http://localhost:5000/random-book')
+  const { data } = await axios('http://localhost:6000/random-book')
 
   return data
 })
@@ -41,6 +41,10 @@ const booksSlice = createSlice({
       if (payload.title && payload.author) {
         state.books.push(createBook(payload, 'API'))
       }
+    })
+
+    builder.addCase(fetchBook.rejected, (_, { error }) => {
+      alert(error.message)
     })
   },
 })
