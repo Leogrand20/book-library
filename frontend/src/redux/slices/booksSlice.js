@@ -2,16 +2,27 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 import { createBook } from '../../utils/createBook'
+import { setError } from './errorSlice'
 
 const initialState = {
   books: [],
 }
 
-export const fetchBook = createAsyncThunk('books/fetchBook', async () => {
-  const { data } = await axios('http://localhost:6000/random-book')
+export const fetchBook = createAsyncThunk(
+  'books/fetchBook',
+  // async (url, thunkAPI) => {
+  async (url, { dispatch }) => {
+    try {
+      const { data } = await axios(url)
 
-  return data
-})
+      return data
+    } catch (error) {
+      // thunkAPI.dispatch(setError(error.message))
+      dispatch(setError(error.message))
+      throw error // для отклонения промиса - чтобы не попадать в блок extraReducers на проверку наличия полей title и author
+    }
+  },
+)
 
 const booksSlice = createSlice({
   name: 'books',
