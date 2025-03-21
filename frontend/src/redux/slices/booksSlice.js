@@ -6,12 +6,13 @@ import { setError } from './errorSlice'
 
 const initialState = {
   books: [],
+  isLoadingViaAPI: false,
 }
 
 export const fetchBook = createAsyncThunk(
   'books/fetchBook',
   // async (url, thunkAPI) => {
-  async (url, { dispatch }) => {
+  async (url, { dispatch, rejectWithValue }) => {
     try {
       const { data } = await axios(url)
 
@@ -19,7 +20,10 @@ export const fetchBook = createAsyncThunk(
     } catch (error) {
       // thunkAPI.dispatch(setError(error.message))
       dispatch(setError(error.message))
-      throw error // для отклонения промиса - чтобы не попадать в блок extraReducers на проверку наличия полей title и author
+      // для отклонения промиса - чтобы не попадать в блок extraReducers на проверку наличия полей title и author
+      return rejectWithValue(error)
+      //  либо:
+      throw error
     }
   },
 )
@@ -47,16 +51,22 @@ const booksSlice = createSlice({
     resetFilters: () => initialState,
   },
 
-  extraReducers: (builder) => {
-    builder.addCase(fetchBook.fulfilled, (state, { payload }) => {
+  extraReducers: ({ addCase }) => {
+    addCase(fetchBook.pending, (state) => {
+      state.isLoadingViaAPI = true
+    })
+
+    addCase(fetchBook.fulfilled, (state, { payload }) => {
+      state.isLoadingViaAPI = false
+
       if (payload.title && payload.author) {
         state.books.push(createBook(payload, 'API'))
       }
     })
 
-    // builder.addCase(fetchBook.rejected, (_, { error }) => {
-    //   alert(error.message)
-    // })
+    addCase(fetchBook.rejected, (state) => {
+      state.isLoadingViaAPI = false
+    })
   },
 })
 
@@ -64,5 +74,6 @@ export const { setAddBook, setDeleteBook, setToggleFavoriteBook } =
   booksSlice.actions
 
 export const selectBooks = (state) => state.books.books
+export const selectIsLoading = (state) => state.books.isLoadingViaAPI
 
 export default booksSlice.reducer
