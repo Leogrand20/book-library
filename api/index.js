@@ -1,16 +1,21 @@
 import express from 'express'
 import cors from 'cors'
 
-import booksData from './data/books.json' with { type: "json" }
+import booksData from './data/books.json' with { type: 'json' }
 
 const app = express()
 app.use(cors())
 
-app.get('/random-book', (req, res) => {
+const getRandomBook = () => {
   const randomIndex = Math.floor(Math.random() * booksData.length)
-  const randomBook = booksData[randomIndex]
 
-  res.json(randomBook)
+  return booksData[randomIndex]
+}
+
+app.get('/random-book', (req, res) => {
+  setTimeout(() => {
+    res.json(getRandomBook())
+  }, 2500)
 })
 
 const port = process.env.PORT || 5000
