@@ -43,9 +43,9 @@ const booksSlice = createSlice({
       }
     })
 
-    builder.addCase(fetchBook.rejected, (_, { error }) => {
-      alert(error.message)
-    })
+    // builder.addCase(fetchBook.rejected, (_, { error }) => {
+    //   alert(error.message)
+    // })
   },
 })
 

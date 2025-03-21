@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 
 import { createBook } from '../../utils/createBook'
 import { setAddBook, fetchBook } from '../../redux/slices/booksSlice'
+import { setError } from '../../redux/slices/errorSlice'
 import data from '../../data/books.json'
 
 import './BookForm.css'
@@ -28,6 +29,8 @@ export const BookForm = () => {
 
       setTitle('')
       setAuthor('')
+    } else {
+      dispatch(setError('Lines title and author are required!'))
     }
   }
 
@@ -57,7 +60,6 @@ export const BookForm = () => {
             id="title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            required
           />
         </div>
 
@@ -69,7 +71,6 @@ export const BookForm = () => {
             id="author"
             value={author}
             onChange={(e) => setAuthor(e.target.value)}
-            required
           />
         </div>
 
