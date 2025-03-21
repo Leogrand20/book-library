@@ -1,5 +1,3 @@
-import { useSelector } from 'react-redux'
-
 import { Header } from './layouts/Header'
 import { Main } from './layouts/Main'
 import { Error } from './components/Error/Error'
