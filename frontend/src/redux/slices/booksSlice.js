@@ -47,8 +47,6 @@ const booksSlice = createSlice({
           : { ...book },
       )
     },
-
-    resetFilters: () => initialState,
   },
 
   extraReducers: ({ addCase }) => {
