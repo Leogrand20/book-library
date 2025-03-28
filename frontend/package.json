@@ -1,5 +1,5 @@
 {
-  "name": "book-library-redux",
+  "name": "book-library-redux-local-backend",
   "private": true,
   "version": "1.0.0",
   "author": {
@@ -7,7 +7,7 @@
     "email": "leograndprix@gmail.com",
     "url": "https://leograndprix.ru"
   },
-  "homepage": "https://github.com/Leogrand20/book-library-redux",
+  "homepage": "https://github.com/Leogrand20/book-library-redux-local-backend",
   "categories": [
     "Other"
   ],
