@@ -1,14 +1,13 @@
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import {
   setOnlyFavoriteFilter,
   resetFilters,
 } from '../../redux/slices/filterSlice'
 
-import { selectOnlyFavoriteFilter } from '../../redux/selectors/filter-selectors'
-
 import { useTitle } from '../../hooks/useTitle'
 import { useAuthor } from '../../hooks/useAuthor'
+import { useOnlyFilter } from '../../hooks/useOnlyFilter'
 
 import './Filter.css'
 
@@ -16,7 +15,7 @@ export const Filter = () => {
   const dispatch = useDispatch()
   const [title, setTitle] = useTitle()
   const [author, setAuthor] = useAuthor()
-  const onlyFavorite = useSelector(selectOnlyFavoriteFilter)
+  const [onlyFavorite, setOnlyFavorite] = useOnlyFilter()
 
   return (
     <div className="app-block filter">
@@ -39,7 +38,7 @@ export const Filter = () => {
               name="favorite"
               id="favorite"
               checked={onlyFavorite}
-              onChange={() => dispatch(setOnlyFavoriteFilter())}
+              onChange={setOnlyFavorite}
             />
             Only Favorite
           </label>
