@@ -15,6 +15,7 @@ import {
 } from '../../redux/slices/booksSlice'
 
 import { filteredBooks } from '../../utils/filteredBooks'
+import { highlightMatch } from '../../utils/highlightMatch'
 
 export const BookItem = () => {
   const dispatch = useDispatch()
@@ -22,24 +23,6 @@ export const BookItem = () => {
   const filterTitle = useSelector(selectTitleFilter)
   const filterAuthor = useSelector(selectAuthorFilter)
   const filterFavorite = useSelector(selectOnlyFavoriteFilter)
-
-  const highlightMatch = (text, filter) => {
-    if (!filter) return text
-
-    const regex = new RegExp(`(${filter})`, 'gi')
-
-    return text.split(regex).map((substring, i) => {
-      if (substring.toLowerCase() === filter.toLowerCase()) {
-        return (
-          <span key={i} className="highlight">
-            {substring}
-          </span>
-        )
-      } else {
-        return substring
-      }
-    })
-  }
 
   return (
     <>
