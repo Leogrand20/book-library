@@ -10,20 +10,18 @@ import {
 import {
   selectAuthorFilter,
   selectOnlyFavoriteFilter,
-  selectTitleFilter,
 } from '../../redux/selectors/filter-selectors'
+
+import { useTitle } from '../../hooks/useTitle'
 
 import './Filter.css'
 
 export const Filter = () => {
   const dispatch = useDispatch()
-  const filterTitle = useSelector(selectTitleFilter)
   const filterAuthor = useSelector(selectAuthorFilter)
   const filterFavorite = useSelector(selectOnlyFavoriteFilter)
 
-  const handleFilterTitleChange = (e) => {
-    dispatch(setTitleFilter(e.target.value))
-  }
+  const [title, setTitle] = useTitle()
 
   const handleFilterAuthorChange = (e) => {
     dispatch(setAuthorFilter(e.target.value))
@@ -46,8 +44,8 @@ export const Filter = () => {
             name="title"
             id="title"
             placeholder="Filter by title..."
-            value={filterTitle}
-            onChange={handleFilterTitleChange}
+            value={title}
+            onChange={setTitle}
           />
         </div>
 
