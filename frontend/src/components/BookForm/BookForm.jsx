@@ -12,9 +12,9 @@ import data from '../../data/books.json'
 import './BookForm.css'
 
 export const BookForm = () => {
+  const dispatch = useDispatch()
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
-  const dispatch = useDispatch()
   const isLoading = useSelector(selectIsLoading)
 
   const handleSubmit = (e) => {
@@ -45,10 +45,6 @@ export const BookForm = () => {
     const randomBookWithId = createBook(randomBook, 'random')
 
     dispatch(setAddBook(randomBookWithId))
-  }
-
-  const handleAddRandomBookViaApi = () => {
-    dispatch(fetchBook('http://localhost:5000/random-book'))
   }
 
   return (
@@ -88,7 +84,9 @@ export const BookForm = () => {
         <div>
           <button
             type="button"
-            onClick={handleAddRandomBookViaApi}
+            onClick={() =>
+              dispatch(fetchBook('http://localhost:5000/random-book'))
+            }
             disabled={isLoading}
           >
             {isLoading ? (
