@@ -1,9 +1,6 @@
 import { useDispatch } from 'react-redux'
 
-import {
-  setOnlyFavoriteFilter,
-  resetFilters,
-} from '../../redux/slices/filterSlice'
+import { resetFilters } from '../../redux/slices/filterSlice'
 
 import { useTitle } from '../../hooks/useTitle'
 import { useAuthor } from '../../hooks/useAuthor'
