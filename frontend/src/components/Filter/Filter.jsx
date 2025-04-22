@@ -1,39 +1,22 @@
 import { useDispatch, useSelector } from 'react-redux'
 
 import {
-  setTitleFilter,
-  setAuthorFilter,
   setOnlyFavoriteFilter,
   resetFilters,
 } from '../../redux/slices/filterSlice'
 
-import {
-  selectAuthorFilter,
-  selectOnlyFavoriteFilter,
-} from '../../redux/selectors/filter-selectors'
+import { selectOnlyFavoriteFilter } from '../../redux/selectors/filter-selectors'
 
 import { useTitle } from '../../hooks/useTitle'
+import { useAuthor } from '../../hooks/useAuthor'
 
 import './Filter.css'
 
 export const Filter = () => {
   const dispatch = useDispatch()
-  const filterAuthor = useSelector(selectAuthorFilter)
-  const filterFavorite = useSelector(selectOnlyFavoriteFilter)
-
   const [title, setTitle] = useTitle()
-
-  const handleFilterAuthorChange = (e) => {
-    dispatch(setAuthorFilter(e.target.value))
-  }
-
-  const handleFilterOnlyFavoriteChange = () => {
-    dispatch(setOnlyFavoriteFilter())
-  }
-
-  const handleRestFilters = () => {
-    dispatch(resetFilters())
-  }
+  const [author, setAuthor] = useAuthor()
+  const onlyFavorite = useSelector(selectOnlyFavoriteFilter)
 
   return (
     <div className="app-block filter">
@@ -55,8 +38,8 @@ export const Filter = () => {
               type="checkbox"
               name="favorite"
               id="favorite"
-              checked={filterFavorite}
-              onChange={handleFilterOnlyFavoriteChange}
+              checked={onlyFavorite}
+              onChange={() => dispatch(setOnlyFavoriteFilter())}
             />
             Only Favorite
           </label>
@@ -68,12 +51,12 @@ export const Filter = () => {
             name="author"
             id="author"
             placeholder="Filter by author..."
-            value={filterAuthor}
-            onChange={handleFilterAuthorChange}
+            value={author}
+            onChange={setAuthor}
           />
         </div>
 
-        <button type="button" onClick={handleRestFilters}>
+        <button type="button" onClick={() => dispatch(resetFilters())}>
           Reset Filters
         </button>
       </div>
