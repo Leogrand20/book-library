@@ -1,5 +1,5 @@
 {
-  "name": "book-library-redux-local-backend",
+  "name": "book-library",
   "private": true,
   "version": "1.0.0",
   "author": {
@@ -7,7 +7,7 @@
     "email": "leograndprix@gmail.com",
     "url": "https://leograndprix.ru"
   },
-  "homepage": "https://github.com/Leogrand20/book-library-redux-local-backend",
+  "homepage": "https://github.com/Leogrand20/book-library",
   "categories": [
     "Other"
   ],
@@ -15,36 +15,36 @@
   "main": "index.jsx",
   "type": "module",
   "scripts": {
-    "c": "rd /s /q dist",
-    "d": "vite --host",
-    "b": "vite build",
-    "bp": "vite build&&vite preview --host --port 4000",
-    "p": "vite preview --host --port 4000"
+    "clear": "rd /s /q dist",
+    "dev": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview --host --port 4000",
+    "buildp": "vite build&&vite preview --host --port 4000"
   },
   "devDependencies": {
-    "@eslint/css": "^0.6.0",
-    "@eslint/js": "^9.23.0",
-    "@types/react": "^19.0.12",
-    "@types/react-dom": "^19.0.4",
-    "@vitejs/plugin-react": "^4.3.4",
-    "eslint": "^9.23.0",
-    "eslint-plugin-react": "^7.37.4",
+    "@eslint/css": "^0.7.0",
+    "@eslint/js": "^9.25.1",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "@vitejs/plugin-react": "^4.4.1",
+    "eslint": "^9.25.1",
+    "eslint-plugin-react": "^7.37.5",
     "globals": "^16.0.0",
     "postcss": "^8.5.3",
     "prettier": "^3.5.3",
     "terser": "^5.39.0",
     "unplugin-zip-pack": "^1.0.3",
-    "vite": "^6.2.3",
-    "vite-plugin-cp": "^4.0.8",
+    "vite": "^6.3.2",
+    "vite-plugin-cp": "^6.0.3",
     "vite-plugin-html-template-mpa": "^1.0.29",
-    "vite-plugin-inspect": "^11.0.0",
+    "vite-plugin-inspect": "^11.0.1",
     "vite-plugin-legacy-swc": "^1.2.3"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^2.6.1",
+    "@reduxjs/toolkit": "^2.7.0",
     "axios": "^1.8.4",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "react-icons": "^5.5.0",
     "react-redux": "^9.2.0",
     "react-toastify": "^11.0.5",
