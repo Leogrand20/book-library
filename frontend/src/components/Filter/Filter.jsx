@@ -1,33 +1,36 @@
 import { useDispatch, useSelector } from 'react-redux'
 
 import {
-  setFilterTitle,
-  setFilterAuthor,
-  setOnlyFavorite,
-  selectFilterTitle,
-  selectFilterAuthor,
-  selectFilterFavorite,
+  setTitleFilter,
+  setAuthorFilter,
+  setOnlyFavoriteFilter,
   resetFilters,
 } from '../../redux/slices/filterSlice'
+
+import {
+  selectAuthorFilter,
+  selectOnlyFavoriteFilter,
+  selectTitleFilter,
+} from '../../redux/selectors/filter-selectors'
 
 import './Filter.css'
 
 export const Filter = () => {
   const dispatch = useDispatch()
-  const filterTitle = useSelector(selectFilterTitle)
-  const filterAuthor = useSelector(selectFilterAuthor)
-  const filterFavorite = useSelector(selectFilterFavorite)
+  const filterTitle = useSelector(selectTitleFilter)
+  const filterAuthor = useSelector(selectAuthorFilter)
+  const filterFavorite = useSelector(selectOnlyFavoriteFilter)
 
   const handleFilterTitleChange = (e) => {
-    dispatch(setFilterTitle(e.target.value))
+    dispatch(setTitleFilter(e.target.value))
   }
 
   const handleFilterAuthorChange = (e) => {
-    dispatch(setFilterAuthor(e.target.value))
+    dispatch(setAuthorFilter(e.target.value))
   }
 
   const handleFilterOnlyFavoriteChange = () => {
-    dispatch(setOnlyFavorite())
+    dispatch(setOnlyFavoriteFilter())
   }
 
   const handleRestFilters = () => {

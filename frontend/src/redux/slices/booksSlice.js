@@ -6,24 +6,20 @@ import { setError } from './errorSlice'
 
 const initialState = {
   books: [],
-  isLoadingViaAPI: false,
+  isLoading: false,
 }
 
 export const fetchBook = createAsyncThunk(
   'books/fetchBook',
-  // async (url, thunkAPI) => {
   async (url, { dispatch, rejectWithValue }) => {
     try {
       const { data } = await axios(url)
 
       return data
     } catch (error) {
-      // thunkAPI.dispatch(setError(error.message))
       dispatch(setError(error.message))
-      // для отклонения промиса - чтобы не попадать в блок extraReducers на проверку наличия полей title и author
+
       return rejectWithValue(error)
-      //  либо:
-      throw error
     }
   },
 )
@@ -51,11 +47,11 @@ const booksSlice = createSlice({
 
   extraReducers: ({ addCase }) => {
     addCase(fetchBook.pending, (state) => {
-      state.isLoadingViaAPI = true
+      state.isLoading = true
     })
 
     addCase(fetchBook.fulfilled, (state, { payload }) => {
-      state.isLoadingViaAPI = false
+      state.isLoading = false
 
       if (payload.title && payload.author) {
         state.books.push(createBook(payload, 'API'))
@@ -63,15 +59,12 @@ const booksSlice = createSlice({
     })
 
     addCase(fetchBook.rejected, (state) => {
-      state.isLoadingViaAPI = false
+      state.isLoading = false
     })
   },
 })
 
 export const { setAddBook, setDeleteBook, setToggleFavoriteBook } =
   booksSlice.actions
-
-export const selectBooks = (state) => state.books.books
-export const selectIsLoading = (state) => state.books.isLoadingViaAPI
 
 export default booksSlice.reducer

@@ -3,11 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { FaSpinner } from 'react-icons/fa'
 
 import { createBook } from '../../utils/createBook'
-import {
-  setAddBook,
-  fetchBook,
-  selectIsLoading,
-} from '../../redux/slices/booksSlice'
+import { setAddBook, fetchBook } from '../../redux/slices/booksSlice'
+import { selectIsLoading } from '../../redux/selectors/books-selectors'
 import { setError } from '../../redux/slices/errorSlice'
 import data from '../../data/books.json'
 
