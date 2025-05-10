@@ -6,9 +6,7 @@ export const highlightMatch = (text, filter) => {
   return text.split(regex).map((substring, i) => {
     if (substring.toLowerCase() === filter.toLowerCase()) {
       return (
-        <span key={i} className="highlight">
-          {substring}
-        </span>
+        <span key={i} className="highlight" >{substring}</span>
       )
     } else {
       return substring
