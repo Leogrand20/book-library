@@ -12,7 +12,7 @@
     "Other"
   ],
   "description": "Practice",
-  "main": "index.jsx",
+  "main": "index.tsx",
   "type": "module",
   "scripts": {
     "clear": "rd /s /q dist",
