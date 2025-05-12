@@ -12,7 +12,7 @@ const getRandomBook = () => {
   return booksData[randomIndex]
 }
 
-app.get('/random-book', (req, res) => {
+app.get('/random-book', (_, res) => {
   setTimeout(() => {
     res.json(getRandomBook())
   }, 2500)
