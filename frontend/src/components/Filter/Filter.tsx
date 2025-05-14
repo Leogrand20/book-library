@@ -1,5 +1,4 @@
-import { useDispatch } from 'react-redux'
-
+import { useAppDispatch } from '../../redux/store'
 import { resetFilters } from '../../redux/slices/filterSlice'
 
 import { useTitle } from '../../hooks/useTitle'
@@ -9,7 +8,7 @@ import { useOnlyFilter } from '../../hooks/useOnlyFilter'
 import './Filter.css'
 
 export const Filter = () => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const [title, setTitle] = useTitle()
   const [author, setAuthor] = useAuthor()
   const [onlyFavorite, setOnlyFavorite] = useOnlyFilter()
