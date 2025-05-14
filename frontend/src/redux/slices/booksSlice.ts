@@ -1,42 +1,55 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 
 import { createBook } from '../../utils/createBook'
 import { setError } from './errorSlice'
+import { BookSlice, IBookWithID } from '../../types/books'
 
-const initialState = {
+const initialState: BookSlice = {
   books: [],
   isLoading: false,
 }
 
-export const fetchBook = createAsyncThunk(
-  'books/fetchBook',
-  async (url, { dispatch, rejectWithValue }) => {
-    try {
-      const { data } = await axios(url)
+export const fetchBook = createAsyncThunk<
+  IBookWithID,
+  undefined,
+  {
+    state: { books: BookSlice }
+    rejectWithValue: string
+  }
+>('books/fetchBook', async (_, { dispatch, rejectWithValue }) => {
+  try {
+    const config: AxiosRequestConfig = {
+      method: 'GET',
+      url: 'http://localhost:5000/random-book',
+    }
+    const { data }: AxiosResponse = await axios(config)
 
-      return data
-    } catch (error) {
+    return data
+  } catch (error) {
+    if (error instanceof Error) {
       dispatch(setError(error.message))
 
       return rejectWithValue(error)
     }
-  },
-)
+
+    return rejectWithValue('Some error')
+  }
+})
 
 const booksSlice = createSlice({
   name: 'books',
   initialState,
   reducers: {
-    setAddBook: (state, { payload }) => {
+    setAddBook: (state, { payload }: PayloadAction<IBookWithID>) => {
       state.books.push(payload)
     },
 
-    setDeleteBook: (state, { payload }) => {
+    setDeleteBook: (state, { payload }: PayloadAction<string>) => {
       state.books = state.books.filter(({ id }) => id !== payload)
     },
 
-    setToggleFavoriteBook: (state, { payload }) => {
+    setToggleFavoriteBook: (state, { payload }: PayloadAction<string>) => {
       state.books = state.books.map((book) =>
         book.id === payload
           ? { ...book, isFavorite: !book.isFavorite }

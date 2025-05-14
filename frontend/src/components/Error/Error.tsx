@@ -1,13 +1,13 @@
 import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { ToastContainer, toast, Bounce } from 'react-toastify'
 
 import { clearError } from '../../redux/slices/errorSlice'
 import { selectError } from '../../redux/selectors/error-selectors'
+import { useAppDispatch, useAppSelector } from '../../redux/store'
 
 export const Error = () => {
-  const errorMessage = useSelector(selectError)
-  const dispatch = useDispatch()
+  const errorMessage = useAppSelector(selectError)
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
     if (errorMessage) {

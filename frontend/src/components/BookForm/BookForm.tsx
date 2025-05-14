@@ -10,9 +10,10 @@ import { setError } from '../../redux/slices/errorSlice'
 import booksData from '../../data/books.json'
 
 import './BookForm.css'
+import { useAppDispatch } from '../../redux/store'
 
 export const BookForm = () => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const isLoading = useSelector(selectIsLoading)
@@ -85,7 +86,7 @@ export const BookForm = () => {
           <button
             type="button"
             onClick={() =>
-              dispatch(fetchBook('http://localhost:5000/random-book'))
+              dispatch(fetchBook())
             }
             disabled={isLoading}
           >

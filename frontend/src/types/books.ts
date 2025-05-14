@@ -8,3 +8,8 @@ export interface IBookWithID extends IBook {
   isFavorite: boolean
   source: string
 }
+
+export type BookSlice = {
+  books: IBookWithID[]
+  isLoading: boolean
+}
