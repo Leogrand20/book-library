@@ -1,24 +1,23 @@
-import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { FormEvent, useState } from 'react'
 import { FaSpinner } from 'react-icons/fa'
 
 import { createBook } from '../../utils/createBook'
 import { setAddBook, fetchBook } from '../../redux/slices/booksSlice'
 import { selectIsLoading } from '../../redux/selectors/books-selectors'
 import { setError } from '../../redux/slices/errorSlice'
+import { useAppDispatch, useAppSelector } from '../../redux/store'
 
 import booksData from '../../data/books.json'
 
 import './BookForm.css'
-import { useAppDispatch } from '../../redux/store'
 
 export const BookForm = () => {
   const dispatch = useAppDispatch()
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
-  const isLoading = useSelector(selectIsLoading)
+  const isLoading = useAppSelector(selectIsLoading)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     if (title && author) {
@@ -43,9 +42,11 @@ export const BookForm = () => {
     const randomIndex = Math.floor(Math.random() * booksData.length)
     const randomBook = booksData[randomIndex]
 
-    const randomBookWithId = createBook(randomBook, 'random')
+    if (randomBook) {
+      const randomBookWithId = createBook(randomBook, 'random')
 
-    dispatch(setAddBook(randomBookWithId))
+      dispatch(setAddBook(randomBookWithId))
+    }
   }
 
   return (
@@ -85,9 +86,7 @@ export const BookForm = () => {
         <div>
           <button
             type="button"
-            onClick={() =>
-              dispatch(fetchBook())
-            }
+            onClick={() => dispatch(fetchBook())}
             disabled={isLoading}
           >
             {isLoading ? (
