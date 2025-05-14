@@ -1,4 +1,11 @@
-export const filteredBooks = (arr, filterTitle, filterAuthor, filterFavorite) =>
+import { IBookWithID } from '../types/books'
+
+export const filteredBooks = (
+  arr: IBookWithID[],
+  filterTitle: string,
+  filterAuthor: string,
+  filterFavorite: boolean,
+) =>
   arr.filter((book) => {
     const titleMatches = book.title
       .toLowerCase()

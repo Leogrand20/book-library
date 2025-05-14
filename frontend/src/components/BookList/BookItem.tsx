@@ -1,4 +1,3 @@
-import { useSelector, useDispatch } from 'react-redux'
 import { BsBookmarkStar, BsBookmarkStarFill } from 'react-icons/bs'
 
 import {
@@ -13,16 +12,17 @@ import {
   setDeleteBook,
   setToggleFavoriteBook,
 } from '../../redux/slices/booksSlice'
+import { useAppDispatch, useAppSelector } from '../../redux/store'
 
 import { filteredBooks } from '../../utils/filteredBooks'
 import { highlightMatch } from '../../utils/highlightMatch'
 
 export const BookItem = () => {
-  const dispatch = useDispatch()
-  const books = useSelector(selectBooks)
-  const filterTitle = useSelector(selectTitleFilter)
-  const filterAuthor = useSelector(selectAuthorFilter)
-  const filterFavorite = useSelector(selectOnlyFavoriteFilter)
+  const dispatch = useAppDispatch()
+  const books = useAppSelector(selectBooks)
+  const filterTitle = useAppSelector(selectTitleFilter)
+  const filterAuthor = useAppSelector(selectAuthorFilter)
+  const filterFavorite = useAppSelector(selectOnlyFavoriteFilter)
 
   return (
     <>
