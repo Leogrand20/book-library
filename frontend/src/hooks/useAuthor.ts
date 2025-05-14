@@ -1,13 +1,14 @@
-import { useSelector, useDispatch } from 'react-redux'
+import { ChangeEvent } from 'react'
 
+import { useAppDispatch, useAppSelector } from '../redux/store'
 import { setAuthorFilter } from '../redux/slices/filterSlice'
 import { selectAuthorFilter } from '../redux/selectors/filter-selectors'
 
 export const useAuthor = () => {
-  const dispatch = useDispatch()
-  const author = useSelector(selectAuthorFilter)
+  const dispatch = useAppDispatch()
+  const author = useAppSelector(selectAuthorFilter)
 
-  const setAuthor = (e) => {
+  const setAuthor = (e: ChangeEvent<HTMLInputElement>) => {
     dispatch(setAuthorFilter(e.target.value))
   }
 

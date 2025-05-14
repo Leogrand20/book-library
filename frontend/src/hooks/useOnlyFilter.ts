@@ -1,11 +1,10 @@
-import { useDispatch, useSelector } from 'react-redux'
-
+import { useAppDispatch, useAppSelector } from '../redux/store'
 import { selectOnlyFavoriteFilter } from '../redux/selectors/filter-selectors'
 import { setOnlyFavoriteFilter } from '../redux/slices/filterSlice'
 
 export const useOnlyFilter = () => {
-  const dispatch = useDispatch()
-  const onlyFavorite = useSelector(selectOnlyFavoriteFilter)
+  const dispatch = useAppDispatch()
+  const onlyFavorite = useAppSelector(selectOnlyFavoriteFilter)
 
   const setOnlyFavorite = () => {
     dispatch(setOnlyFavoriteFilter())
