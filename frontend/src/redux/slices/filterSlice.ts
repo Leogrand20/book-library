@@ -1,6 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-const initialState = {
+import { FilterSlice } from '../../types/filter'
+
+const initialState: FilterSlice = {
   title: '',
   author: '',
   onlyFavorite: false,
@@ -10,11 +12,11 @@ const filterSlice = createSlice({
   name: 'filter',
   initialState,
   reducers: {
-    setTitleFilter: (state, { payload }) => {
+    setTitleFilter: (state, { payload }: PayloadAction<string>) => {
       state.title = payload
     },
 
-    setAuthorFilter: (state, { payload }) => {
+    setAuthorFilter: (state, { payload }: PayloadAction<string>) => {
       state.author = payload
     },
 
@@ -26,7 +28,6 @@ const filterSlice = createSlice({
   },
 })
 
-// export const setTitleFilter = filterSlice.actions.setTitleFilter
 export const {
   setTitleFilter,
   setAuthorFilter,
