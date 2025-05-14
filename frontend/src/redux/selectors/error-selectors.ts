@@ -1,1 +1,3 @@
-export const selectError = (state) => state.error.error
+import { RootState } from '../store'
+
+export const selectError = (state: RootState) => state.error.error

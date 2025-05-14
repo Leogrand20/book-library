@@ -1,2 +1,4 @@
-export const selectBooks = (state) => state.books.books
-export const selectIsLoading = (state) => state.books.isLoading
+import { RootState } from '../store'
+
+export const selectBooks = (state: RootState) => state.books.books
+export const selectIsLoading = (state: RootState) => state.books.isLoading
