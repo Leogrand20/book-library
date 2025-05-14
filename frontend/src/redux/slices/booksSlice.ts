@@ -17,25 +17,35 @@ export const fetchBook = createAsyncThunk<
     state: { books: BookSlice }
     rejectWithValue: string
   }
->('books/fetchBook', async (_, { dispatch, rejectWithValue }) => {
-  try {
-    const config: AxiosRequestConfig = {
-      method: 'GET',
-      url: 'http://localhost:5000/random-book',
+>(
+  'books/fetchBook',
+  async (_, { dispatch, rejectWithValue }) => {
+    try {
+      const config: AxiosRequestConfig = {
+        method: 'GET',
+        url: 'http://localhost:5000/random-book',
+      }
+      const { data }: AxiosResponse = await axios(config)
+
+      return data
+    } catch (error) {
+      if (error instanceof Error) {
+        dispatch(setError(error.message))
+
+        return rejectWithValue(error)
+      }
+
+      return rejectWithValue('Some error')
     }
-    const { data }: AxiosResponse = await axios(config)
+  },
+  {
+    condition: (_, { getState }) => {
+      const { isLoading } = getState().books
 
-    return data
-  } catch (error) {
-    if (error instanceof Error) {
-      dispatch(setError(error.message))
-
-      return rejectWithValue(error)
-    }
-
-    return rejectWithValue('Some error')
-  }
-})
+      if (isLoading) return false
+    },
+  },
+)
 
 const booksSlice = createSlice({
   name: 'books',
