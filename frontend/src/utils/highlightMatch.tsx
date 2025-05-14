@@ -1,4 +1,4 @@
-export const highlightMatch = (text, filter) => {
+export const highlightMatch = (text: string, filter: string) => {
   if (!filter) return text
 
   const regex = new RegExp(`(${filter})`, 'gi')
